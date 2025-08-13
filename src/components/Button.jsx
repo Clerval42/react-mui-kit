@@ -1,34 +1,81 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import clsx from "clsx";
+import buttonTokens from "../tokens/button.json";
 
-const variantProps = {
-  primary: {
-    mui: { variant: "contained", color: "primary" },
-    tw: "!bg-blue-600 !text-white hover:!bg-blue-700 active:!scale-95 transition-transform",
-  },
-  secondary: {
-    mui: { variant: "contained", color: "secondary" },
-    tw: "!bg-gray-200 !text-gray-900 hover:!bg-gray-300 active:!scale-95 transition-transform",
-  },
-  outline: {
-    mui: { variant: "outlined", color: "primary" },
-    tw: "!border-blue-600 !text-blue-600 !bg-transparent hover:!bg-blue-50 active:!scale-95 transition-transform",
-  },
-  danger: {
-    mui: { variant: "contained", color: "error" },
-    tw: "!bg-red-600 !text-white hover:!bg-red-700 active:!scale-95 transition-transform",
-  },
-};
+function getButtonStyles(variant, state, size) {
+  const v = buttonTokens.button[variant] || buttonTokens.button.primary;
+  const s = buttonTokens.button.sizes[size] || buttonTokens.button.sizes.medium;
+  const st = v[state] || v.default;
+  return {
+    minWidth: s.minWidth.value,
+    padding: `${s.paddingV.value} ${s.paddingH.value}`,
+    fontSize: s.fontSize.value,
+    backgroundColor: st.background.value,
+    color: st.color.value,
+    border: st.border.value,
+    textTransform: "none",
+    transition: "background 0.2s, color 0.2s",
+    // ...add more as needed
+  };
+}
 
-export default function Buttonmc({ variant = "primary", className, ...props }) {
-  const { mui, tw } = variantProps[variant] || variantProps.primary;
+export default function UiButton({
+  variant = "primary",
+  size = "medium",
+  disabled = false,
+  className,
+  startIcon,
+  endIcon,
+  children,
+  ...props
+}) {
+  // Determine state for styling
+  const [mouseDown, setMouseDown] = React.useState(false);
+  const [hover, setHover] = React.useState(false);
+  let state = "default";
+  if (disabled) state = "disabled";
+  else if (mouseDown) state = "pressed";
+  else if (hover) state = "mouseIn";
+
+  const sx = getButtonStyles(variant, state, size);
+  const iconGap = buttonTokens.button.sizes[size]?.iconGap?.value || '8px';
+  const iconSize = buttonTokens.button.sizes[size]?.iconSize?.value || '16px';
+
   return (
     <Button
-      {...mui}
+      variant="contained"
+      color="inherit"
       disableElevation
-      className={clsx(tw, className)}
+      className={clsx(className)}
+      sx={{
+        ...sx,
+        '& .MuiButton-startIcon': {
+          marginRight: iconGap,
+          marginLeft: 0,
+          gap: 0,
+        },
+        '& .MuiButton-endIcon': {
+          marginLeft: iconGap,
+          marginRight: 0,
+          gap: 0,
+        },
+        '& .MuiButton-startIcon > *, & .MuiButton-endIcon > *': {
+          fontSize: iconSize,
+          width: iconSize,
+          height: iconSize,
+        },
+      }}
+      disabled={disabled}
+      startIcon={startIcon}
+      endIcon={endIcon}
+      onMouseDown={() => setMouseDown(true)}
+      onMouseUp={() => setMouseDown(false)}
+      onMouseLeave={() => { setMouseDown(false); setHover(false); }}
+      onMouseEnter={() => setHover(true)}
       {...props}
-    />
+    >
+      {children}
+    </Button>
   );
 }
