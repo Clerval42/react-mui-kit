@@ -1,79 +1,58 @@
-# React UI Library with MUI & Tailwind
+# @clerval42/ui-kit
 
-This library provides a set of customizable React UI components built with Material-UI (MUI) and styled using Tailwind CSS. It is designed for rapid development, flexibility, and easy theming.
+[![npm version](https://img.shields.io/npm/v/@clerval42/ui-kit?style=flat-square)](https://www.npmjs.com/package/@clerval42/ui-kit)
+[![GitHub](https://img.shields.io/badge/github-repo-blue?logo=github&style=flat-square)](https://github.com/clerval42/tailwind-mui-library)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
 
-## Features
-- Built with [MUI](https://mui.com/) for accessibility and robust UI primitives
-- Styled and extended with [Tailwind CSS](https://tailwindcss.com/)
-- Easy-to-use variants and props for customization
-- All components are fully compatible with MUI and can be used alongside classic MUI components
-- **Design tokens** for consistent theming and scalable design
+A customizable React component library built on top of **Material-UI (MUI)** and styled with **Tailwind CSS**. Design tokens (JSON) control colors, spacing, borders, and icons — change once, apply everywhere.
 
-## Installation
+- ✅ Ready-to-use, themeable UI components
+- 🎯 Consistent design via tokens
+- 🤝 Full compatibility with MUI + Tailwind
+- 🧩 Easy to add variants/sizes
 
+## Quick Start
+
+```bash
+npm install @clerval42/ui-kit
 ```
-npm install @mui/material @emotion/react @emotion/styled clsx @mui/icons-material
-# and Tailwind CSS if not already installed
-```
+
+> **Note:** You must have  Tailwind CSS set up in your project to use this library. If you haven't already, follow the [Tailwind CSS installation guide](https://tailwindcss.com/docs/installation) before proceeding.
 
 ## Usage
-Import the components you need from your library:
+
+> **Note:** You must import the button as `UiButton` (not `Button`):
 
 ```jsx
-import { Buttonmc, Alertmc, Cardmc, Inputmc, Modalmc, Badgemc, Avatarmc } from './components';
-```
+import { UiButton } from "@clerval42/ui-kit";
 
-## Components & Variants
-
-### UiButton
-A button with MUI logic, Tailwind styling, and **design token** support. Supports icons, all design system variants, and sizes. Button styles (colors, borders, spacing, icon size/gap, etc.) are controlled by JSON design tokens for consistency and easy theming.
-
-**How tokens work:**
-- All button visual styles (color, border, background, font size, icon size/gap, etc.) are defined in a JSON file (see `src/tokens/button.json`).
-- The UiButton component reads these tokens and applies them dynamically for each variant, state (default, hover, pressed, disabled), and size.
-- To change the look of all buttons, just update the token values—no need to touch the component code.
-- Tokens are not pushed to your repo if you add them to `.gitignore` (e.g. `src/tokens/`).
-
-**Example token (button.json):**
-```json
-{
-  "button": {
-    "primary": {
-      "default": { "background": { "value": "#123456" }, "color": { "value": "#FFFFFF" }, "border": { "value": "2px solid transparent" } },
-      "hover":   { "background": { "value": "transparent" }, "color": { "value": "#123456" }, "border": { "value": "2px solid #123456" } }
-      // ...other states
-    },
-    "sizes": {
-      "large": { "fontSize": { "value": "18px" }, "iconGap": { "value": "10px" } }
-      // ...other sizes
-    }
-  }
+export default function App() {
+  return <UiButton variant="primary">Submit</UiButton>;
 }
 ```
 
-**How to use UiButton:**
-```jsx
-import { Add, ArrowForward } from '@mui/icons-material';
+## Features
 
-<UiButton variant="primary" startIcon={<Add />}>Add</UiButton>
-<UiButton variant="secondary" endIcon={<ArrowForward />}>Next</UiButton>
-<UiButton variant="primary" size="large">Large Primary</UiButton>
-<UiButton variant="secondary" disabled>Disabled Secondary</UiButton>
-```
+* Design tokens (JSON) → CSS variables at runtime
+* MUI `ButtonBase` + Tailwind styling
+* `startIcon` / `endIcon`, sizes: `small | medium | large`
+* Variants: `primary | secondary | outlined | ghost`
+* Dark/light themes via token switch
 
-**How to customize tokens:**
-- Edit `src/tokens/button.json` to change colors, borders, icon size/gap, etc.
-- The component will automatically use the new values.
+## Tokens
 
-## Customization
-- All components accept a `className` prop for further Tailwind or custom styling.
-- You can use any MUI prop supported by the underlying component.
-- Variants and sizes are extensible—edit the component files or design tokens to add more!
-- **Buttonmc**: Icon size and gap are controlled by design tokens for perfect alignment.
+Button styles (colors, borders, spacing, icon size/gap, etc.) are controlled by JSON design tokens for consistency and easy theming. Edit `src/tokens/button.json` to customize button appearance.
 
-## Classic MUI Usage
-You can still use classic MUI components directly if you want full control or need features not exposed by this library.
+## Peer Dependencies
 
----
+* react >= 18
+* @mui/material >= 5
+* @emotion/react, @emotion/styled
 
-**Happy coding!**
+## Versioning
+
+* SemVer. See Releases: [https://github.com/clerval42/tailwind-mui-library/releases](https://github.com/clerval42/tailwind-mui-library/releases)
+
+## License
+
+MIT
