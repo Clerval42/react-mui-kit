@@ -1,7 +1,7 @@
 # @clerval42/ui-kit
 
 [![npm version](https://img.shields.io/npm/v/@clerval42/ui-kit?style=flat-square)](https://www.npmjs.com/package/@clerval42/ui-kit)
-[![GitHub](https://img.shields.io/badge/github-repo-blue?logo=github&style=flat-square)](https://github.com/clerval42/tailwind-mui-library)
+[![GitHub](https://img.shields.io/badge/github-repo-blue?logo=github&style=flat-square)](https://github.com/Clerval42/react-mui-kit)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
 
 A customizable React component library built on top of **Material-UI (MUI)** and styled with **Tailwind CSS**. Design tokens (JSON) control colors, spacing, borders, and icons — change once, apply everywhere.
@@ -51,7 +51,7 @@ Button styles (colors, borders, spacing, icon size/gap, etc.) are controlled by 
 
 ## Versioning
 
-* SemVer. See Releases: [https://github.com/clerval42/tailwind-mui-library/releases](https://github.com/clerval42/tailwind-mui-library/releases)
+* SemVer. See Releases: [https://github.com/clerval42/tailwind-mui-library/releases](https://github.com/Clerval42/react-mui-kit/releases)
 
 ## License
 
